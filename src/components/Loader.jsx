@@ -1,1 +1,3 @@
-{/* Indicador de loading */}
+export default function Loader() {
+    return <p>Carregando...</p>;
+}
