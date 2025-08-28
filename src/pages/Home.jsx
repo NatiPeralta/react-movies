@@ -2,39 +2,42 @@ import { useState } from "react";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 import MovieCard from "../components/MovieCard";
+import Pagination from "../components/Pagination";
+import { searchMovies } from "../services/api";
+import "../styles/Home.css";
 import useFavorites from "../hooks/useFavorites";
 
 function Home() {
+  const { favorites, addFavorite, removeFavorite, isFavorite } = useFavorites();
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  
-  const { favorites, addFavorites, removeFavorites, isFavorite } = useFavorites();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-  const handleSearch = async () => {
+  const handleSearch = async (page = 1) => {
     if (!query) return;
 
     setLoading(true);
     setError(null);
 
-    const apiKey = "6119b68cf5e68e614987d6bc308aeaaa";
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=pt-BR&query=${query}`;
-
     try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error("Erro na requisição");
-      const data = await response.json();
-      setMovies(data.results);
+      const data = await searchMovies(query, page);
+      setMovies(data.results || []);
+      setTotalPages(data.total_pages > 500 ? 500 : data.total_pages); // TMDB limita 500 páginas
+      setCurrentPage(page);
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "Erro na requisição");
+      setMovies([]);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="home-container">
+      <form onSubmit={(e) => { e.preventDefault(); handleSearch(1); }}>
       <h1>Buscar Filmes</h1>
       <input
         type="text"
@@ -42,22 +45,35 @@ function Home() {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Digite o nome do filme"
       />
-      <button onClick={handleSearch}>Buscar</button>
+      <button type="submit" disabled={loading}>Buscar</button>
+    </form>
 
-      {loading && <Loader />}
+    {loading && <Loader />}
       {error && <Error message={error} />}
 
-      <ul style={{ padding: 0 }}>
-        {movies.map((movie) => (
+      <div className="movie-grid">
+        {movies && movies.length > 0 ? (
+          movies.map((movie) => (
           <MovieCard
             key={movie.id}
             movie={movie}
-            isFavorite={isFavorite}
-            addFavorite={addFavorites}
-            removeFavorite={removeFavorites}
+            isFavorite={isFavorite} 
+            addFavorite={addFavorite}
+            removeFavorite={removeFavorite}
+          />
+        ))
+      ) : (
+        !loading && <p>Nenhum filme encontrado.</p>
+      )}
+      </div>
+
+      {movies.length > 0 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={(page) => handleSearch(page)}
         />
-        ))}
-      </ul>
+      )}
     </div>
   );
 }

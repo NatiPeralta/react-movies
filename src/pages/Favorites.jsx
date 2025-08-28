@@ -1,24 +1,28 @@
 import useFavorites from "../hooks/useFavorites";
 import MovieCard from "../components/MovieCard";
+import "../styles/Favorites.css";
 
 function Favorites() {
-    const { favorites, removeFavorite, isFavorite } = useFavorites();
-
-    if (favorites.length === 0) return <p>Você não tem filmes favoritos ainda.</p>;
+    const { favorites, addFavorite, removeFavorite, isFavorite } = useFavorites();
 
     return (
-        <div>
+        <div className="favorites-container">
             <h1>Meus Favoritos</h1>
-            <ul style={{ padding: 0 }}>
+            {favorites.length === 0 ? (
+                <p>Você não tem filmes favoritos ainda.</p>
+            ) : (
+            <div className="favorites-grid">
                 {favorites.map((movie) => (
                     <MovieCard
                         key={movie.id}
                         movie={movie}
                         isFavorite={isFavorite}
+                        addFavorite={addFavorite}
                         removeFavorite={removeFavorite}
                     />    
                 ))}
-            </ul>
+            </div>
+            )}
         </div>
     );
 }

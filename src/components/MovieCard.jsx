@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "../styles/MovieCard.css";
 
 export default function MovieCard({ movie, isFavorite, addFavorite, removeFavorite }) {
     const posterUrl = movie.poster_path
@@ -6,12 +7,10 @@ export default function MovieCard({ movie, isFavorite, addFavorite, removeFavori
         : "https://via.placeholder.com/200x300?text=Sem+Imagem";
 
     return (
-    <li style={{ listStyle: "none", marginBottom: "20px" }}>
+    <div className="movie-card">
       <Link to={`/movie/${movie.id}`}>
         <img src={posterUrl} alt={movie.title} width={150} />
       </Link>
-
-      <div>
         <h3>{movie.title}</h3>
         <p>{movie.release_date?.slice(0, 4) || "Ano desconhecido"}</p>
 
@@ -21,6 +20,5 @@ export default function MovieCard({ movie, isFavorite, addFavorite, removeFavori
         <button onClick={() => addFavorite(movie)}>Adicionar aos favoritos</button>
       )}
       </div>
-    </li>
     );
 }
