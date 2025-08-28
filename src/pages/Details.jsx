@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { getMovieDetails, getCredits } from "../services/api";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 import useFavorites from "../hooks/useFavorites";
@@ -14,25 +15,17 @@ function Details() {
 
     useEffect(() => {
         const fetchMovie = async () => {
-            const apiKey = "6119b68cf5e68e614987d6bc308aeaaa";
-            const movieUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=pt-BR`;
-            const creditsUrl = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}&language=pt-BR`;
 
             try {
-                const [movieRes, creditsRes] = await Promise.all([
-                    fetch(movieUrl),
-                    fetch(creditsUrl),
+                const [movieData, creditsData] = await Promise.all([
+                    getMovieDetails(id),
+                    getCredits(id),
                 ]);
-
-                if (!movieRes.ok || !creditsRes.ok) throw new Error("Erro ao buscar filmes");
-
-                const movieData = await movieRes.json();
-                const creditsData = await creditsRes.json();
 
                 setMovie(movieData);
                 setCredits(creditsData);
             } catch (err) {
-                setError(err.message);
+                setError(err.message || "Erro ao carregar os detalhes do filme");
             } finally {
                 setLoading(false);
             }
