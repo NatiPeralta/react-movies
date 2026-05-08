@@ -1,5 +1,5 @@
-import useFavorites from "../hooks/useFavorites";
-import MovieCard from "../components/MovieCard";
+import useFavorites from "../hooks/useFavorites.js";
+import MovieCard from "../components/MovieCard.jsx";
 import "../styles/Favorites.css";
 
 function Favorites() {

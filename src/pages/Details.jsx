@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getMovieDetails, getCredits } from "../services/api";
-import Loader from "../components/Loader";
-import Error from "../components/Error";
-import useFavorites from "../hooks/useFavorites";
+import { getMovieDetails, getCredits } from "../services/api.js";
+import Loader from "../components/Loader.jsx";
+import Error from "../components/Error.jsx";
+import useFavorites from "../hooks/useFavorites.js";
 
 function Details() {
     const { id } = useParams();
