@@ -2,8 +2,6 @@
 
 Uma aplicação web desenvolvida em React para pesquisa de filmes, visualização de detalhes, navegação por páginas e gerenciamento de uma lista personalizada de favoritos.
 
-![Captura de Tela do Projeto](./src/assets/preview.png) <!-- Adicione uma imagem da tela aqui caso tenha -->
-
 ## 🚀 Funcionalidades
 
 - 🔍 **Busca de Filmes:** Pesquisa em tempo real integrada com API externa.
