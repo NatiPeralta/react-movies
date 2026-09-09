@@ -20,4 +20,21 @@ Uma aplicação web desenvolvida em React para pesquisa de filmes, visualizaçã
 
 1. Clone este repositório:
    ```bash
-   git clone [https://github.com/NatiPeralta/portfolio-react.git](https://github.com/NatiPeralta/portfolio-react.git)
+   git clone [https://github.com/NatiPeralta/react-movies.git](https://github.com/NatiPeralta/react-movies.git)
+2. Acesse a pasta do projeto:
+   ```bash
+   cd react-movies
+3. Instale as dependências:
+   ```bash
+   npm install
+4. Execute a aplicação:
+   ```bash
+   npm run dev
+
+👩‍💻 Autora
+
+Desenvolvido por Nati Peralta
+
+    LinkedIn: https://www.linkedin.com/in/nat%C3%A1lia-peralta/
+
+    GitHub: https://github.com/NatiPeralta
