@@ -1,12 +1,25 @@
-# React + Vite
+# 🎬 Movie App - Busca e Favoritos de Filmes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Uma aplicação web desenvolvida em React para pesquisa de filmes, visualização de detalhes, navegação por páginas e gerenciamento de uma lista personalizada de favoritos.
 
-Currently, two official plugins are available:
+![Captura de Tela do Projeto](./src/assets/preview.png) <!-- Adicione uma imagem da tela aqui caso tenha -->
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Funcionalidades
 
-## Expanding the ESLint configuration
+- 🔍 **Busca de Filmes:** Pesquisa em tempo real integrada com API externa.
+- ⭐ **Favoritos:** Adição e remoção de filmes da lista de favoritos com persistência local.
+- 📄 **Paginação:** Navegação fluida entre páginas de resultados e filmes populares.
+- 📱 **Layout Responsivo:** Interface adaptada para dispositivos móveis e desktops.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tecnologias Utilizadas
+
+- **React** (Hooks, Componentização e Estado)
+- **JavaScript (ES6+)**
+- **CSS3** (Flexbox para alinhamento dinâmico de cards)
+- **TMDB API** (Consumo de dados)
+
+## 🔧 Como Executar o Projeto Localmente
+
+1. Clone este repositório:
+   ```bash
+   git clone [https://github.com/NatiPeralta/portfolio-react.git](https://github.com/NatiPeralta/portfolio-react.git)
