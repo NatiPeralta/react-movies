@@ -9,16 +9,18 @@ export default function MovieCard({ movie, isFavorite, addFavorite, removeFavori
     return (
     <div className="movie-card">
       <Link to={`/movie/${movie.id}`}>
-        <img src={posterUrl} alt={movie.title} width={150} />
+        <img src={posterUrl} alt={movie.title} />
       </Link>
         <h3>{movie.title}</h3>
         <p>{movie.release_date?.slice(0, 4) || "Ano desconhecido"}</p>
 
+      <div className="favorite-btn">
         {isFavorite(movie.id) ? (
         <button onClick={() => removeFavorite(movie.id)}>Remover dos favoritos</button>
       ) : (
         <button onClick={() => addFavorite(movie)}>Adicionar aos favoritos</button>
       )}
       </div>
+    </div>
     );
 }

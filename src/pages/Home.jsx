@@ -1,4 +1,4 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import Loader from "../components/Loader.jsx";
 import Error from "../components/Error.jsx";
 import MovieCard from "../components/MovieCard.jsx";
@@ -17,46 +17,62 @@ function Home() {
   const [totalPages, setTotalPages] = useState(1);
   const [hasSearched, setHasSearched] = useState(false);
 
-  useEffect(() => {
-    const loadPopularMovies = async () => {
-      setLoading(true);
-      try {
-        const data = await getPopularMovies();
-        setMovies(data.results || []);
-        setTotalPages(data.total_pages > 500 ? 500 : data.total_pages);
-      } catch (err) {
-        setError("Não foi possível carregar os filmes iniciais.");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const loadPopularMovies = async (page = 1) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await getPopularMovies(page); // passe a página para a API
+      setMovies(data.results || []);
+      setTotalPages(data.total_pages > 500 ? 500 : data.total_pages);
+      setCurrentPage(page);
+    } catch (err) {
+      setError("Não foi possível carregar os filmes.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    loadPopularMovies();
+  useEffect(() => {
+    loadPopularMovies(1);
   }, []);
 
   const handleSearch = async (page = 1) => {
-    if (!query) return;
+    if (!query.trim()) return;
 
     setLoading(true);
     setError(null);
     setHasSearched(true);
 
     try {
-      const data = await searchMovies(query, page);
-      setMovies(data.results || []);
-      setTotalPages(data.total_pages > 500 ? 500 : data.total_pages); // TMDB limita 500 páginas
-      setCurrentPage(page);
-    } catch (err) {
-      setError(err.message || "Erro na requisição");
-      setMovies([]);
-    } finally {
-      setLoading(false);
+        const data = await searchMovies(query, page);
+        setMovies(data.results || []);
+        setTotalPages(data.total_pages > 500 ? 500 : data.total_pages); // TMDB limita 500 páginas
+        setCurrentPage(page);
+      } catch (err) {
+        setError(err.message || "Erro na requisição");
+        setMovies([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+  const handlePageChange = (newPage) => {
+    if (hasSearched) {
+      handleSearch(newPage);
+    } else {
+      loadPopularMovies(newPage);
     }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const onSearchSubmit = (e) => {
+    e.preventDefault();
+    handleSearch(1);
   };
 
   return (
     <div className="home-container">
-      <form onSubmit={(e) => { e.preventDefault(); handleSearch(1); }}>
+      <form onSubmit={onSearchSubmit}>
       <h1>Buscar Filmes</h1>
       <input
         type="text"
@@ -68,7 +84,7 @@ function Home() {
     </form>
 
     {loading && <Loader />}
-      {error && <Error message={error} />}
+    {error && <Error message={error} />}
 
       <div className="movie-grid">
         {movies && movies.length > 0 ? (
@@ -90,7 +106,7 @@ function Home() {
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
-          onPageChange={(page) => handleSearch(page)}
+          onPageChange={handlePageChange}
         />
       )}
     </div>

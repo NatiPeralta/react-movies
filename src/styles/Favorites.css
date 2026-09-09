@@ -3,19 +3,25 @@
   background-color: #0d0d0d;
   color: #f5f5f5;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.favorites-title {
+.favorites-container h1 {
+  color: #f5f5f5;
+  margin: 20px 0 40px 0px;
   text-align: center;
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #7d0804;
 }
 
 .favorites-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  justify-content: center;
+  align-items: center;
   gap: 20px;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .favorites-empty {

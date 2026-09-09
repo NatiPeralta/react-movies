@@ -1,13 +1,15 @@
+import "../styles/Home.css";
+
 function Pagination ({ currentPage, totalPages, onPageChange }) {
     return (
-        <div style={{ marginTop: "20px" }}>
+        <div className="page-btn">
             <button
                 onClick={() => onPageChange(currentPage - 1)}
                 disabled={currentPage === 1}
             >
                 Anterior
             </button>
-            <span style={{ margin: "0 10px" }}>
+            <span>
                 Página {currentPage} de {totalPages}
             </span>
             <button 
