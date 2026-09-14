@@ -111,23 +111,19 @@
 
 /* Celular */
 @media (max-width: 450px) {
-  .home-container {
-    width: 100%;
-  }
 
   .home-container form input {
   padding: 15px 0px;
-  width: 400px;
+  width: 350px;
 }
 
   .home-container button[type="submit"] {
-  width: 400px;
+  width: 350px;
 }
 
 .movie-grid {
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   width: 95%;
-  gap: 20px;
 }
 
 }
@@ -135,11 +131,11 @@
 @media (max-width: 400px) {
 
   .home-container form input {
-  width: 350px;
+  width: 300px;
 }
 
   .home-container button[type="submit"] {
-  width: 350px;
+  width: 300px;
 }
 
 .movie-grid {
@@ -150,19 +146,31 @@
 
 @media (max-width: 340px) {
   .home-container form h1 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
   .home-container form input {
-  width: 300px;
+  width: 250px;
+  height: 10px;
 }
 
   .home-container button[type="submit"] {
-  width: 300px;
+  margin-bottom: 20px;
+  padding: 0;
+  width: 250px;
+  height: 40px;
 }
 
 .movie-grid h3 {
-  font-size: 1rem;
+  font-size: 0.8rem;
+}
+
+.movie-grid p {
+  font-size: 0.8rem;
+}
+
+.page-btn {
+  width: 300px;
 }
 
 }

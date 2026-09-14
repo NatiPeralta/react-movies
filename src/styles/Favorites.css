@@ -32,14 +32,15 @@
 }
 
 /* Responsividade */
-/* Tablet */
-@media (max-width: 780px) {
-  .favorites-container {
-  width: 100%;
+
+/* celular */
+@media (max-width: 450px) {
+  .favorites-grid{
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  width: 95%;
 }
 }
 
-/* celular */
 @media (max-width: 400px) {
   .favorites-grid{
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -49,10 +50,14 @@
 
 @media (max-width: 340px) {
   .favorites-container h1 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .favorites-grid h3 {
-  font-size: 1rem;
+  font-size: 0.8rem;
+}
+
+.favorites-grid p {
+  font-size: 0.8rem;
 }
 }

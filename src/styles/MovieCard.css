@@ -55,21 +55,20 @@
 /* celular */
 @media (max-width: 450px) {
   .favorite-btn button{
-  margin: 10px 5px 5px 5px;
+  padding: 5px;
 }
 }
 
 @media (max-width: 400px) {
   .favorite-btn button{
-  padding: 10px 6px 10px 6px;
+  padding: 5px 6px 5px 6px;
 }
 }
 
 @media (max-width: 340px) {
+
   .favorite-btn button{
-  padding: 5px;
-}
-  .favorite-btn button {
-  font-size: 13px;
+  padding: 5px 10px;
+  font-size: 0.8rem;
 }
 }

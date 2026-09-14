@@ -83,7 +83,6 @@
 /* Tablet */
 @media (max-width: 780px) {
   .header {
-    width: 744px;
     margin: -50px 5px;
     padding: 30px;
   }
@@ -93,7 +92,6 @@
 @media (max-width: 450px) {
   .header {
     margin: -50px 0px;
-    width: 405px;
     padding: 30px;
   }
 
@@ -103,29 +101,25 @@
 }
 
 @media (max-width: 400px) {
-  .header { 
-    width: 355px;
+  .nav a {
+  font-size: 1rem;
   }
-
   .logo-img {
-  height: 115px;
+  height: 100px;
   }
 }
 
 }
 
 @media (max-width: 340px) {
-   .header {
-    margin: -50px -20px;
-    width: 100%;
-    padding: 30px;
+  .header {
+    margin: -45px 0px;
+    gap: 10px;
   }
-
   .nav a {
-  font-size: 1rem;
-}
-
-.logo-img {
-  height: 100px;
-}
+  font-size: 0.8rem;
+  }
+  .logo-img {
+  height: 90px;
+  }
 }
