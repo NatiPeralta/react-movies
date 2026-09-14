@@ -110,7 +110,7 @@
 }
 
 /* Celular */
-@media (max-width: 450px) {
+@media (max-width: 600px) {
 
   .home-container form input {
   padding: 15px 0px;
