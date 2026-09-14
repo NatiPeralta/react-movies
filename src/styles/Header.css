@@ -83,6 +83,7 @@
 /* Tablet */
 @media (max-width: 780px) {
   .header {
+    width: 744px;
     margin: -50px 5px;
     padding: 30px;
   }

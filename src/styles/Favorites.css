@@ -30,3 +30,29 @@
   color: #888;
   margin-top: 40px;
 }
+
+/* Responsividade */
+/* Tablet */
+@media (max-width: 780px) {
+  .favorites-container {
+  width: 100%;
+}
+}
+
+/* celular */
+@media (max-width: 400px) {
+  .favorites-grid{
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  width: 95%;
+}
+}
+
+@media (max-width: 340px) {
+  .favorites-container h1 {
+  font-size: 1.5rem;
+}
+
+.favorites-grid h3 {
+  font-size: 1rem;
+}
+}
