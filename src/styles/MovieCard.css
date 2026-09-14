@@ -50,3 +50,26 @@
 .favorite-btn button:hover {
   background-color: #b80c09;
 }
+
+/* Responsividadde */
+/* celular */
+@media (max-width: 450px) {
+  .favorite-btn button{
+  margin: 10px 5px 5px 5px;
+}
+}
+
+@media (max-width: 400px) {
+  .favorite-btn button{
+  padding: 10px 6px 10px 6px;
+}
+}
+
+@media (max-width: 340px) {
+  .favorite-btn button{
+  padding: 5px;
+}
+  .favorite-btn button {
+  font-size: 13px;
+}
+}

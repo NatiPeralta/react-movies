@@ -56,15 +56,75 @@
 }
 
 /* Responsividade */
-@media (max-width: 768px) {
+
+/* Laptop */
+@media (max-width: 1500px) {
   .header {
-    flex-direction: column;
+    margin: -30px 100px;
     padding: 15px;
   }
 
-  .nav {
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 10px;
+  #root {
+    background-color: #7d0804;
   }
+
+/* Small Laptop */
+@media (max-width: 1024px) {
+  .header {
+    margin: -30px 20px;
+    padding: 8px;
+  }
+
+  .nav {
+    gap: 15px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 780px) {
+  .header {
+    margin: -50px 5px;
+    padding: 30px;
+  }
+}
+
+/* Celular */
+@media (max-width: 450px) {
+  .header {
+    margin: -50px 0px;
+    width: 405px;
+    padding: 30px;
+  }
+
+  .logo-img {
+  height: 120px;
+  }
+}
+
+@media (max-width: 400px) {
+  .header { 
+    width: 355px;
+  }
+
+  .logo-img {
+  height: 115px;
+  }
+}
+
+}
+
+@media (max-width: 340px) {
+   .header {
+    margin: -50px -20px;
+    width: 100%;
+    padding: 30px;
+  }
+
+  .nav a {
+  font-size: 1rem;
+}
+
+.logo-img {
+  height: 100px;
+}
 }
