@@ -1,4 +1,4 @@
-# 🎬 Movie App - Busca e Favoritos de Filmes
+# 🎬 React Movies - Busca e Favoritos de Filmes
 
 Uma aplicação web desenvolvida em React para pesquisa de filmes, visualização de detalhes, navegação por páginas e gerenciamento de uma lista personalizada de favoritos.
 
