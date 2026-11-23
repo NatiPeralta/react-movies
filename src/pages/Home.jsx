@@ -1,21 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import Loader from "../components/Loader.jsx";
 import Error from "../components/Error.jsx";
 import MovieCard from "../components/MovieCard.jsx";
 import Pagination from "../components/Pagination.jsx";
+import HeroBanner from "../components/HeroBanner.jsx";
 import { getPopularMovies, searchMovies } from "../services/api.js";
 import "../styles/Home.css";
 import useFavorites from "../hooks/useFavorites.js";
 
 function Home() {
-  const { favorites, addFavorite, removeFavorite, isFavorite } = useFavorites();
-  const [query, setQuery] = useState("");
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("search") || "";
+
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [hasSearched, setHasSearched] = useState(false);
+
+  const catalogRef = useRef(null);
+  const hasSearched = Boolean(query.trim());
+
+  const scrollToCatalog = () => {
+    catalogRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const loadPopularMovies = async (page = 1) => {
     setLoading(true);
@@ -32,19 +42,11 @@ function Home() {
     }
   };
 
-  useEffect(() => {
-    loadPopularMovies(1);
-  }, []);
-
-  const handleSearch = async (page = 1) => {
-    if (!query.trim()) return;
-
+  const handleSearch = async (searchQuery, page = 1) => {
     setLoading(true);
     setError(null);
-    setHasSearched(true);
-
     try {
-        const data = await searchMovies(query, page);
+        const data = await searchMovies(searchQuery, page);
         setMovies(data.results || []);
         setTotalPages(data.total_pages > 500 ? 500 : data.total_pages); // TMDB limita 500 páginas
         setCurrentPage(page);
@@ -56,35 +58,37 @@ function Home() {
       }
     };
 
+    // Reage automaticamente quando a URL muda (ex: nova busca ou clique em Home)
+    useEffect(() => {
+      if (hasSearched) {
+        handleSearch(query, 1);
+      } else {
+        loadPopularMovies(1);
+      }
+    }, [query]);
+
   const handlePageChange = (newPage) => {
     if (hasSearched) {
-      handleSearch(newPage);
+      handleSearch(query, newPage);
     } else {
       loadPopularMovies(newPage);
     }
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const onSearchSubmit = (e) => {
-    e.preventDefault();
-    handleSearch(1);
+    catalogRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <div className="home-container">
-      <form onSubmit={onSearchSubmit}>
-      <h1>Buscar Filmes</h1>
-      <input
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Digite o nome do filme"
-      />
-      <button type="submit" disabled={loading}>Buscar</button>
-    </form>
+      {!hasSearched && movies.length > 0 && (
+        <HeroBanner movies={movies} onExploreClick={scrollToCatalog} />
+      )}
 
-    {loading && <Loader />}
-    {error && <Error message={error} />}
+      <div ref={catalogRef} className="catalog-section">
+        <h2 className="catalog-title">
+          {hasSearched ? `Resultados para "${query}"` : "Filmes Populares"}
+        </h2>
+
+        {loading && <Loader />}
+        {error && <Error message={error} />}
 
       <div className="movie-grid">
         {movies && movies.length > 0 ? (
@@ -98,7 +102,7 @@ function Home() {
           />
         ))
       ) : (
-        !loading && hasSearched && movies.length === 0 && <p>Nenhum filme encontrado.</p>
+        !loading && hasSearched && <p>Nenhum filme encontrado.</p>
       )}
       </div>
 
@@ -110,6 +114,7 @@ function Home() {
         />
       )}
     </div>
+   </div> 
   );
 }
 
